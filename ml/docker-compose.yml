@@ -1,0 +1,10 @@
+version: '2'
+services:
+  index:
+    build:
+      context: .
+    image: 'pydl:latest'
+    volumes:
+      - .:/notebooks
+    ports:
+      - '8888:8888'
