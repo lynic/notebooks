@@ -10,7 +10,10 @@ RUN apt-get update && \
     # pip install universe && \
     pip install $TORCH_WHL && \
     pip install torchvision && \
-    apt-get install -y vim git && \
+    apt-get install -y git vim git && \
+    # git clone https://github.com/pdollar/coco /opt/coco && \
+    # cd /opt/coco/pythonAPI && \
+    # make && \
     apt-get clean && \
     rm -r /var/lib/apt/lists/* /root/.cache/pip/
 
