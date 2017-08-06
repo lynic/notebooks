@@ -1,6 +1,6 @@
 FROM tensorflow/tensorflow:1.2.0-gpu-py3
 
-ENV TORCH_WHL=http://download.pytorch.org/whl/cu80/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl
+ENV TORCH_WHL=http://download.pytorch.org/whl/cu80/torch-0.2.0.post1-cp35-cp35m-manylinux1_x86_64.whl
 
 RUN apt-get update && \
     # apt-get install -y tk-dev python-tk zlib1g-lib cmake && \
