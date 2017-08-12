@@ -1,0 +1,27 @@
+#FROM continuumio/anaconda3
+FROM nvidia/cuda:8.0-cudnn7-runtime
+
+RUN apt-get update  && \
+    apt-get install apt-utils -y && \
+    apt-get install wget bzip2 -y && \
+    wget --quiet https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /opt/miniconda.sh && \
+    /bin/bash /opt/miniconda.sh -b -p /opt/conda && \
+    rm -rf /opt/miniconda.sh
+
+ENV PATH /opt/conda/bin:$PATH
+
+#RUN /opt/conda/bin/conda config --add channels soumith && \
+#    /opt/conda/bin/conda config --add channels conda-forge && \
+RUN /opt/conda/bin/conda install jupyter -y && \
+    mkdir /notebooks
+
+RUN /opt/conda/bin/conda install pytorch torchvision cuda80 -c soumith -y && \
+    /opt/conda/bin/conda install tensorflow-gpu -y && \
+    /opt/conda/bin/conda install -y keras-gpu scikit-image
+
+RUN apt-get install -y golang libjpeg-turbo8-dev make && \
+    pip install universe
+
+WORKDIR /notebooks
+
+CMD /opt/conda/bin/jupyter notebook --notebook-dir=/notebooks --NotebookApp.password='sha1:011fa3ba7740:bffe62ff98d8c9a398a7504896dd1eb33c999c76' --ip=0.0.0.0 --port=8888 --no-browser --allow-root
